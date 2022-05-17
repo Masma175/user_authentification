@@ -9,7 +9,8 @@
         <input type="text" name="username" placeholder="Votre Nom d'utilisateur">
         <input type="password" name="password" placeholder="Votre Mot de passe">
         <input type="submit" value="Connexion"><br>
-        <p>Vous n'avez pas de compte ? <a href="#">Créer un compte</a></p>
+        <p style="color: red;">{{error}}</p>
+        <p>Vous n'avez pas de compte ? <a href="{% url 'register' %}">Créer un compte</a></p>
 
     </form>
 
