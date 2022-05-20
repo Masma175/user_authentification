@@ -46,14 +46,14 @@ def signup(request):
     if request.method == 'POST':  
         form = SignupForm(request.POST)  
         if form.is_valid():  
-            # save form in the memory not in database  
+            # Enregistre en memoire et non dans la base de donnees
             user = form.save(commit=False)  
             user.is_active = False  
             user.save()  
-            # to get the domain of the current site  
+            # Prise en main du nom de domaine de l'application 
             current_site = get_current_site(request)  
             mail_subject = "Le lien d'activation de votre compte a été envoyé à votre adresse mail !"  
-            message = render_to_string('acc_active_email.html', {  
+            message = render_to_string('Users/email_activation_compte.html', {  
                 'user': user,  
                 'domain': current_site.domain,  
                 'uid':urlsafe_base64_encode(force_bytes(user.pk)),  
@@ -64,7 +64,7 @@ def signup(request):
                         mail_subject, message, to=[to_email]  
             )  
             email.send()
-            return HttpResponse('Verifier vos mails et confirmer votre identité en cliquant sur le lien qui vous a été envoyé pour confirmer votre identité')  
+            return render(request, 'Users/page_after_register.html')  
     else:  
         form = SignupForm()  
     return render(request, 'Users/register.html', {'form': form})
