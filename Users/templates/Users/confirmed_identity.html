@@ -1,0 +1,11 @@
+{% extends 'base.html' %}  
+  
+{% block content %}
+
+{% if page %}
+    <p>Merci pour la confirmation de votre identité via votre adresse mail, utilisez le formulaire de connection pour avoir accès à votre compte !</p>
+{% else %}
+    <p>Code d'activation est invalide ou a expiré</p>
+{% endif %}
+
+{% endblock %}  

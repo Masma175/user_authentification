@@ -80,7 +80,9 @@ def activate(request, uidb64, token):
         user = None  
     if user is not None and account_activation_token.check_token(user, token):  
         user.is_active = True  
-        user.save()  
-        return HttpResponse('Merci pour la confirmation de votre identité via vos mails, utilisez le formulaire de connection pour avoir accès à votre compte !')  
+        user.save()
+        page = True
+        return render(request, 'Users/confirmed_identity.html', {'page': page})  
     else:  
-        return HttpResponse("Le lien d'activation n'est plus valide !")  
+        page = False
+        return HttpResponse(request, "Users/confirmed_identity.html", {'page': page})
